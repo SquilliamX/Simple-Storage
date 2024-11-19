@@ -2,7 +2,7 @@
 pragma solidity >=0.8.18 <0.9.0; // stating our version // this says greater than or equal to 0.8.19 but less than 0.9.0
 
 contract SimpleStorage {
-    // all types of variables are: boolean, unit(positive or negative), int(only postive), string, bytes
+    // all types of variables are: boolean, unit(only positive), int(postive or negative), string, bytes
     // myFavoriteNumber gets initialized to 0 if no value is given
     // variables get initialized as internal if no visibility is given. (public/private/external/internal)
     // variables that are created outside of functions and in contracts are saved in storage.
@@ -30,7 +30,7 @@ contract SimpleStorage {
     // when working with custom types you have to define the type("Person" in this case) on both sides
     // Person public myFriend = Person({favoriteNumber: 7, name: "Pat"});
 
-    function store(uint256 _favoriteNumber) public {
+    function store(uint256 _favoriteNumber) public virtual {
         myFavoriteNumber = _favoriteNumber;
     }
     // a function marked view means we are only going to read state from the blockchain
