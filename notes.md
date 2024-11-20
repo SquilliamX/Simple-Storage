@@ -172,6 +172,8 @@ Explantion:
 `"store(uint256)"`: we want to interact with the store function, and it takes a uint256 as its parameter.
 `123`: the values(arguments) that we want to pass.
 
+Another example: `cast send 0x6c4791c3a9E9Bc5449045872Bd1b602d6385E3E1 "solveChallenge(string,string)" "chocolate" "Squilliam" --rpc-url $SEPOLIA_RPC_URL --account SepoliaBurner` - As you can see, here we put the name of the parameters as well as its type, this is how you would do it. as you can see we are passing the arugments of "chocolate" and "Squilliam".
+
 Running this command will return a bunch of data, to read the data, run `cast call --help`. This will show you the arguments that `call` takes. The arguments are `TO`, `SIG`, and `ARGS` again! The difference is, `call` is calling a transaction to read data, whereas `send` is sending a transaction to modify the blockchain!
 
 To use `call` run: `cast call <contract address> <function name> <input parameters>`
