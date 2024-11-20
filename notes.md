@@ -1,3 +1,18 @@
+# Notes
+
+---
+
+## Getting Started
+
+To start a new foundry project, run `forge init`
+To compile a foundry project, run `forge build`
+
+`forge` is used to compile and interact with our contracts
+`cast` is used to interact with contracts that have already been deployed.
+`anvil` is used to spin up a local blockchain in out terminal for testing.
+
+---
+
 **_ NEVER USE A .ENV FOR PRODUCTION BUILDS, ONLY USE A .ENV FOR TESTING _**
 
 to deploy a Singular Contract while testing on anvil or a testnet:
@@ -6,7 +21,7 @@ to deploy a smart contract to a chain, use the following command of:
 
 forge create <filename> --rpc-url http://<endpoint-url> --private-key <privatekey>.
 
-you can get the endpoint url from metamask or from chainlist.org
+you can get the endpoint url(PRC_URL) from alchemy. when getting the url from alchemy, copy the https endpoint. then set up your .env like `.env`
 
 example:
 forge create SimpleStorage --rpc-url http://127.0.0.1:8545 --private-key 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80.
@@ -123,6 +138,20 @@ you can run `cast wallet list` and it will show you all a list of the names you 
 
 after encrypting your private key clear your terminal's history with `history -c`
 
+After deploying a contract copy the hash and input it into its blockchain's etherscan, then click on the "to" as this will be the contract. (The hash created is the hash of the transaction and the "to" is the contract itself.)
+
+### Verifying a Deploying Contract:
+
+Manually (Not Recommended):
+
+1. When on the contract on etherscan, click the "Verify and Publish" button in the "Contract" tab of the contract on etherscan. This will take you to a different page on etherscan.
+2. Select the correct options that define what you just deployed. (it will ask for info such as: address, Compiler type and version, and License type.)
+3. Then copy the code of the contract and paste it in the "Enter Solidity Contract Code below" section and define the contrustor args if you have them(if you dont then leave it blank).
+4. Select "yes" for the "Optimization" button.
+5. If done correctly, you will now be able to see your contracts that have been deployed in the contracts "read" tab.
+
+Programatically (Recommended):
+
 ---
 
 ## How to interact with deployed contracts from the command line:
@@ -155,3 +184,47 @@ this command will return hex data, and needs to be decoded. so to decode it, run
 example: the hex data returned is: `0x000000000000000000000000000000000000000000000000000000000000007b` so the command is `cast --to-base 0x000000000000000000000000000000000000000000000000000000000000007b dec` ("dec" stands for decimal. it represents the type of format we want to decode the data to.)
 
 This returns the data that we submitted of `123`. (NOTE: This returns the data we submitted because it is the only data submitted and the contract function "retrieve" is written to return the most recent number.)
+
+---
+
+## TIPS AND TRICKS
+
+run `forge fmt` to auto format your code.
+
+---
+
+## Everything ZK-SYNC
+
+Zk-sync is a rollup L2.
+
+### Zk-SYNC Foundry
+
+When deploying to ZK-sync, you want to use the zk-sync version of foundry. Learn more at https://github.com/matter-labs/foundry-zksync. learn more @ https://updraft.cyfrin.io/courses/foundry/foundry-simple-storage/foundry-zksync. this is course "Foundry Fundamentals" section 1, video #27 - #32
+
+0. run `forge --version`
+1. clone the repo in the parent directory. so the parent directory for this file(soundry-simple-storage-F23) would be foundry-23. once in the parent directory, clone the repo with `git clone git@github.com:matter-labs/foundry-zksync.git` or whatever the clone is at the time you are reading this.
+2. this will create a new zksync folder that we can cd into. so cd into it. (this would be in the parent directory you just cloned the repo into).
+3. then once inside the new directory, run `./install-foundry-zksync` (you have to be on linux or wsl or ubuntu).
+4. now go back to the directory you want to deploy to zksync and run `forge --version`, you will see it is now slightly different.
+5. in the directory you want to deploy to zksync run `foundryup-zksync`. this will install the latest version of foundry zksync.
+
+Now you are all done! If you run `forge build --help` you will see there is now zksync flags.
+
+**_ If you want to switch back to vanilla/base foundry, run `foundryup` _**
+and if you want to switch back to zksync foundry, just run `foundryup-zksync` as you already have the pre-requisites.
+
+when we run `forge build` in vanilla foundry, we get an `out` folder that has all the compilation details. when we run `forge build --zksync` in zksync foundry, we get a `zkout` folder with all the compilation details for zksync.
+
+### Deploying on ZK-SYNC
+
+#### Running a local zkSync test node using Docker, and deploying a smart contract to the test node.
+
+to learn more, learn more @ https://github.com/Cyfrin/foundry-simple-storage-cu and at the bottom it has a "zn-Sync" intructions
+
+run `foundryup-zksync`
+install docker.
+to deploy to zksync, use `forge create`.
+
+There are more steps for a local zkSync test node. To find out more watch course "Foundry Fundamentals" section 1, video #29 and #30.
+
+Will update this later!
