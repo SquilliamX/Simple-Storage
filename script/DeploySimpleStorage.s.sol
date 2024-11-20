@@ -3,13 +3,13 @@ pragma solidity 0.8.18;
 
 // this is a script to deploy the smart contracts in the src folder to a blockchain. 
 
-// we must inport Script.sol to tell foundry that this is a script.
+// we must import Script.sol to tell foundry that this is a script.
 import {Script} from "forge-std/Script.sol";
 import {SimpleStorage} from "../src/SimpleStorage.sol";
 
 // this file ends with ".s.sol" because that is the naming convention in foundry, scripts should also end in ".s.sol"
 
-// this script will deploy our smart contracts. we should also deploy smart contracts this way.
+// this script will deploy our smart contracts. we should always deploy smart contracts this way.
 contract DeploySimpleStorage is Script {
     // all deployments scripts need to have this "run" function because this will be the main function called when deploying the contract.
     function run() external returns (SimpleStorage) {
