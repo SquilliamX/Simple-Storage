@@ -21,7 +21,7 @@ contract SimpleStorage {
 
     // dynamic array: the size of the array can grow and shrink
     // static array: the size is fixed: example: Person[3]
-    //dynamic array of type person
+    //dynamic array of type struct person
     Person[] public listOfPeople; // Gets defaulted to a empty array
 
     // mapping types are like a search functionality or dictionary
